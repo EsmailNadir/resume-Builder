@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import React from "react";
@@ -29,4 +30,27 @@ export default function Home() {
       </section>
     </div>
   );
+=======
+'use client'
+
+import WorkExperienceForm from "./components/WorkExperienceForm"
+import PersonalForm from "./components/PersonalForm"
+import React from "react"
+import SummaryForm from "./components/summaryForm"
+
+export default function Home() {
+  const handleFormSubmit = (data: any) =>{
+    console.log("FormSubmitted:", data);
+    
+  }
+  return (
+    <>
+    <WorkExperienceForm onSubmit={handleFormSubmit}/>
+    <PersonalForm  onSubmit={handleFormSubmit}/>
+    <SummaryForm onSubmit={handleFormSubmit}/>
+    </>
+  )
+    
+  
+>>>>>>> 6d138701e87ee6d94c98f2869af38f6862d4ade0
 }
