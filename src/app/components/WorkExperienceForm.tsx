@@ -1,10 +1,5 @@
 'use client'
 
-<<<<<<< HEAD
-export default function WorkExperienceForm() {
-  
-}
-=======
 import React from "react";
 import { useState, FormEvent, ChangeEvent } from "react";
 
@@ -71,4 +66,3 @@ const WorkExperienceForm: React.FC<WorkExperienceFormProps> = ({onSubmit}) => {
 }
 
   export default WorkExperienceForm;
->>>>>>> 6d138701e87ee6d94c98f2869af38f6862d4ade0
