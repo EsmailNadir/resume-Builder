@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from "react";
 
 export type EducationData = {
   schoolName: string;
@@ -17,15 +17,17 @@ interface EducationFormProps {
 
 const EducationForm: React.FC<EducationFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<EducationData>({
-    schoolName: '',
-    degree: '',
-    fieldOfStudy: '',
-    startDate: '',
-    endDate: '',
-    description: '',
+    schoolName: "",
+    degree: "",
+    fieldOfStudy: "",
+    startDate: "",
+    endDate: "",
+    description: "",
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -51,16 +53,12 @@ const EducationForm: React.FC<EducationFormProps> = ({ onSubmit }) => {
 
       <div>
         <label>Degree</label>
-        <input 
-          name="degree"
-          value={formData.degree}
-          onChange={handleChange}
-        />
+        <input name="degree" value={formData.degree} onChange={handleChange} />
       </div>
 
       <div>
         <label>Field of Study</label>
-        <input 
+        <input
           name="fieldOfStudy"
           value={formData.fieldOfStudy}
           onChange={handleChange}
@@ -69,7 +67,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ onSubmit }) => {
 
       <div>
         <label>Start Date</label>
-        <input 
+        <input
           type="date"
           name="startDate"
           value={formData.startDate}
@@ -96,7 +94,10 @@ const EducationForm: React.FC<EducationFormProps> = ({ onSubmit }) => {
         ></textarea>
       </div>
 
-      <button className='bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 rounded' type="submit">
+      <button
+        className="bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 rounded"
+        type="submit"
+      >
         Save
       </button>
     </form>
