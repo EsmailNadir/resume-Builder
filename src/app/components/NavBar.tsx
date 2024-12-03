@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function NavBar() {
   return (
@@ -7,19 +8,19 @@ export default function NavBar() {
         <h1 className="text-lg font-bold">Resume Builder</h1>
         <ul className="flex space-x-4">
           <li>
-            <a href="/" className="hover:underline">
+            <Link href="/" className="hover:underline">
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/resume" className="hover:underline">
-            Skills
-            </a>
+            <Link href="/resume" className="hover:underline">
+              Skills
+            </Link>
           </li>
           <li>
-            <a href="/about" className="hover:underline">
+            <Link href="/about" className="hover:underline">
               Education
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

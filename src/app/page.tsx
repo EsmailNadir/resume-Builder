@@ -1,45 +1,75 @@
-'use client'
+"use client";
 
-import WorkExperienceForm from "./components/WorkExperienceForm"
-import PersonalForm from "./components/PersonalForm"
-import React from "react"
-import { useState } from "react"
-import SummaryForm from "./components/summaryForm"
-import SkillsForm from "./components/SkillsForm"
-import EducationForm from "./components/EducationForm"
+import WorkExperienceForm from "./components/WorkExperienceForm";
+import PersonalForm from "./components/PersonalForm";
+import React from "react";
+import { useState } from "react";
+import SummaryForm from "./components/SummaryForm";
 
+interface ResumeFormSection {
+  formName: string;
+  formId: string;
+}
 
+const Forms: ResumeFormSection[] = [
+  { formName: "Personal Info", formId: "PersonalForm" },
+  { formName: "Personal Statement", formId: "SummaryForm" },
+  { formName: "Work Experience", formId: "WorkExperienceForm" },
+];
 
 export default function Home() {
+  const [showForm, setShowForm] = useState<string | null>(null);
 
-  const [showForm, setShowForm] = useState<string | null>(null)
-
-  const handleFormSubmit = (data: any) =>{
+  const handleFormSubmit = (data: any) => {
     console.log("FormSubmitted:", data);
-    
-  }
+  };
+
   return (
-    <div>
-      <button className=" my-6 mx-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=> setShowForm('WorkExperienceForm')}> Work Experience</button>
-      <button  className=" my-6 mx-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=> setShowForm('PersonalForm')}> Personal Form</button>
-      <button className="my-6 mx-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=> setShowForm('SummaryForm')}> Summary Form</button>
-
-      <div>
-        {showForm === 'WorkExperienceForm' && (
-          <WorkExperienceForm onSubmit={handleFormSubmit}/>
-        )}
-        {showForm === 'PersonalForm' && (
-          <PersonalForm  onSubmit={handleFormSubmit}/>
-        )}
-        {showForm === 'SummaryForm' && (
-          <SummaryForm onSubmit={handleFormSubmit}/>
-        )}
+    <div className="flex flex-row h-[calc(100vh-64px)]">
+      <div className="h-full flex-grow-0 w-[28rem] border-r overflow-y-scroll">
+        <div>
+          {Forms.map((form) => (
+            <div key={form.formId}>
+              <button
+                className={`${
+                  showForm === form.formId
+                    ? "bg-neutral-200 hover:bg-neutral-50 font-semibold"
+                    : "bg-neutral-100 hover:bg-neutral-50 font-light"
+                } w-full h-20 text-lg text-left px-4 border-b`}
+                onClick={() =>
+                  setShowForm((prev) =>
+                    prev === form.formId ? null : form.formId
+                  )
+                }
+              >
+                {form.formName}
+              </button>
+              <div
+                className={`transition-all duration-500 overflow-clip bg-white ${
+                  showForm === form.formId ? "h-fit p-4" : "h-0 px-4"
+                }`}
+                
+              >
+                {showForm === form.formId && (
+                  <>
+                    {form.formId === "WorkExperienceForm" && (
+                      <WorkExperienceForm onSubmit={handleFormSubmit} />
+                    )}
+                    {form.formId === "PersonalForm" && (
+                      <PersonalForm onSubmit={handleFormSubmit} />
+                    )}
+                    {form.formId === "SummaryForm" && (
+                      <SummaryForm onSubmit={handleFormSubmit} />
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
-    
-    
-  )
-    
-  
+      <div className="h-full">{/* doc goes here */}</div>
+    </div>
+  );
 }
