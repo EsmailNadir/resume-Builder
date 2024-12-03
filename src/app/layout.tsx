@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter } from 'next/font/google';
+
 import "./globals.css";
 import WorkExperienceForm from "./components/WorkExperienceForm";
 import Navbar from "./components/NavBar";
@@ -16,6 +18,9 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const inter = Inter({subsets:['latin', 'latin-ext']})
+
+
 export const metadata: Metadata = {
   title: "Resume Builder",
   description: "An app for building your resume.",
@@ -29,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} antialiased`}
       >
       <Navbar />
         {children}
