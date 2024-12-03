@@ -1,31 +1,35 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 
-export type SkillsData = {
-  skills: string;
-};
+export type SkillsData = string;
 
 interface SkillsFormProps {
-  onSubmit: (data: SkillsData) => void;
+  data: SkillsData[]; // Accepting the data prop
+  onChange: (newData: SkillsData[]) => void;
+  onSubmit: (data: SkillsData[]) => void; // `data` here is the array of skills
 }
 
-const SkillsForm: React.FC<SkillsFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState<SkillsData>({
-    skills: "",
-  });
+const SkillsForm: React.FC<SkillsFormProps> = ({ onSubmit, data, onChange }) => {
+  const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
+    const updatedData = [...data];
+    updatedData[index] = e.target.value; // Update specific skill
+    onChange(updatedData);
+  };
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const addSkill = () => {
+    onChange([...data, ""]); // Add a new empty skill
+  };
+
+  const removeSkill = (index: number) => {
+    const updatedData = [...data];
+    updatedData.splice(index, 1); // Remove the skill at the specified index
+    onChange(updatedData);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(data); // Pass the entire skills array
   };
 
   return (
@@ -34,13 +38,31 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ onSubmit }) => {
         <label className="block text-sm font-semibold text-gray-700 mb-2">
           Skills
         </label>
-        <textarea
-          name="skills"
-          value={formData.skills}
-          onChange={handleChange}
-          placeholder=""
-          rows={5}
-        />
+        {data.map((skill, index) => (
+          <div key={index} className="flex items-center mb-2">
+            <input
+              type="text"
+              value={skill}
+              onChange={(e) => handleChange(index, e)}
+              className="border border-gray-300 rounded px-3 py-2 w-full"
+              placeholder="Enter a skill"
+            />
+            <button
+              type="button"
+              onClick={() => removeSkill(index)}
+              className="ml-2 text-red-500 hover:text-red-700"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={addSkill}
+          className="mt-2 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        >
+          Add Skill
+        </button>
       </div>
       <button
         type="submit"
