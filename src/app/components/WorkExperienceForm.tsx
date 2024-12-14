@@ -53,14 +53,26 @@ const WorkExperienceForm: React.FC<WorkExperienceFormProps> = ({
   };
 
   return (
-    <form className="shadow-lg my-6 w-1/3" onSubmit={handleSubmit}>
+    <form className="my-6" onSubmit={handleSubmit}>
       <h2 className="text-lg font-bold mb-4">Work Experience</h2>
       {data.map((entry, index) => (
-        <div key={index} className="mb-6 border-b pb-4">
+        <div key={index} className="mb-6 border-b p-4 bg-neutral-50 rounded">
+          <div className="py-4 flex border-b mb-4">
+            <h3 className="text-lg font-semibold flex-grow">
+              {entry.jobTitle ? entry.jobTitle : "New Entry"}
+            </h3>
+            <button
+              type="button"
+              className="text-red-500 hover:underline"
+              onClick={() => deleteEntry(index)}
+            >
+              Delete
+            </button>
+          </div>
           <div>
             <label>Job Title</label>
             <input
-              className="shadow-md my-2 w-full"
+              className="block w-full p-2 border rounded"
               name="jobTitle"
               value={entry.jobTitle}
               onChange={(e) => handleChange(index, e)}
@@ -69,7 +81,7 @@ const WorkExperienceForm: React.FC<WorkExperienceFormProps> = ({
           <div>
             <label>Company</label>
             <input
-              className="shadow-md my-2 w-full"
+              className="block w-full p-2 border rounded"
               name="company"
               value={entry.company}
               onChange={(e) => handleChange(index, e)}
@@ -78,7 +90,7 @@ const WorkExperienceForm: React.FC<WorkExperienceFormProps> = ({
           <div>
             <label>Start Date</label>
             <input
-              className="shadow-md my-2 w-full"
+              className="block w-full p-2 border rounded"
               type="date"
               name="startDate"
               value={entry.startDate}
@@ -88,7 +100,7 @@ const WorkExperienceForm: React.FC<WorkExperienceFormProps> = ({
           <div>
             <label>End Date</label>
             <input
-              className="shadow-md my-2 w-full"
+              className="block w-full p-2 border rounded"
               type="date"
               name="endDate"
               value={entry.endDate}
@@ -98,19 +110,12 @@ const WorkExperienceForm: React.FC<WorkExperienceFormProps> = ({
           <div>
             <label>Description</label>
             <textarea
-              className="shadow-md my-2 w-full"
+              className="block w-full p-2 border rounded"
               name="description"
               value={entry.description}
               onChange={(e) => handleChange(index, e)}
             />
           </div>
-          <button
-            type="button"
-            className="text-red-500 hover:underline"
-            onClick={() => deleteEntry(index)}
-          >
-            Delete Entry
-          </button>
         </div>
       ))}
       <button
