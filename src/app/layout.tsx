@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 
 import "./globals.css";
 import WorkExperienceForm from "./components/WorkExperienceForm";
@@ -18,8 +18,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const inter = Inter({subsets:['latin', 'latin-ext']})
-
+const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
   title: "Resume Builder",
@@ -33,12 +32,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} antialiased`}
-      >
-      <Navbar />
+      <body className={`${inter.className} antialiased`}>
+        <Navbar />
         {children}
-        
       </body>
     </html>
   );
