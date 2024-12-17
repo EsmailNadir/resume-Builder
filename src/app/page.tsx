@@ -57,6 +57,12 @@ export default function Home() {
 
   console.log("ResumePreview data:", resumeBuilder);
 
+  const pdfResume = async () =>{
+    const html2pdf = await require('html2pdf.js')
+    const element = document.getElementById("PDF")
+    html2pdf(element)
+}
+
   return (
     <div className="flex pt-16">
       <div className="fixed flex flex-col w-screen max-w-md overflow-y-auto h-screen max-h-[calc(100vh-4rem)] pt-4 bg-neutral-50">
@@ -143,12 +149,13 @@ export default function Home() {
           )}
         </div>
       </div>
-      {/* Resume Preview */}
-      <div className="w-[calc(100vw-29rem)] translate-x-[28rem] flex items-center justify-center">
-        <div className="w-[8.5in] h-[11in] my-12">
-          <ResumePreview data={resumeBuilder} />
-        </div>
+
+      
+      <div className="w-[8.5in] h-[11in] mr-6">
+        <ResumePreview data={resumeBuilder} />
+        <button onClick={pdfResume} className='bg-blue-400' type="submit"> Convert to PDF</button>
       </div>
+    
     </div>
   );
 }

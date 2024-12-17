@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "postcss";
 
 interface ResumePreviewProps {
   data: {
@@ -31,12 +32,14 @@ interface ResumePreviewProps {
   };
 }
 
+
+
 const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
   return (
     <div className="w-[8.5in] h-[11in] bg-white border border-gray-300 shadow-md overflow-auto p-6">
       <h1 className="text-xl font-bold mb-4">Resume Preview</h1>
 
-      
+      <div id="PDF">
       <h2 className="text-lg font-semibold mb-2">Personal Information</h2>
       <p>Name: {data.PersonalForm.firstName} {data.PersonalForm.lastName}</p>
       <p>Job Title: {data.PersonalForm.jobTitle}</p>
@@ -92,11 +95,16 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
         <p>No education details added yet.</p>
       )}
 
-      {/* Summary */}
+      
       <h2 className="text-lg font-semibold mt-6 mb-2">Summary</h2>
       <p>{data.SummaryForm || "No summary provided yet."}</p>
+    
     </div>
+    </div>
+    
+    
   );
 };
 
 export default ResumePreview;
+
