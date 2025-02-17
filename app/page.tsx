@@ -1,13 +1,13 @@
 "use client";
 
-import WorkExperienceForm from "../components/WorkExperienceForm";
-import PersonalForm from "../components/PersonalForm";
+import WorkExperienceForm from "./components/WorkExperienceForm";
+import PersonalForm from "./components/PersonalForm";
 import React from "react";
 import { useState } from "react";
-import SummaryForm from "../components/summaryForm";
-import SkillsForm from "../components/SkillsForm";
-import EducationForm from "../components/EducationForm";
-import ResumePreview from "../components/resumePreview";
+import SummaryForm from "./components/summaryForm";
+import SkillsForm from "./components/SkillsForm";
+import EducationForm from "./components/EducationForm";
+import ResumePreview from "./components/resumePreview";
 
 export default function Home() {
   const [resumeBuilder, setResumeBuilder] = useState({
