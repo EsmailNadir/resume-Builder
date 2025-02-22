@@ -2,23 +2,19 @@
 
 import React, { ChangeEvent, FormEvent } from "react";
 
-type SummaryFormData = string;
-
 interface SummaryFormProps {
-  data: SummaryFormData; // Accepting a single string as data
-  onChange: (newData: SummaryFormData) => void;
-  onSubmit: (data: SummaryFormData) => void;
+  summary: string; 
+  setSummary: (newSummary: string) => void; 
 }
 
-const SummaryForm: React.FC<SummaryFormProps> = ({ data, onChange, onSubmit }) => {
+const SummaryForm: React.FC<SummaryFormProps> = ({ summary, setSummary }) => {
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
-    onChange(newValue); // Update the parent state
+    setSummary(e.target.value); 
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit(data); // Submit the summary data
+    console.log("Summary submitted:", summary);
   };
 
   return (
@@ -29,7 +25,7 @@ const SummaryForm: React.FC<SummaryFormProps> = ({ data, onChange, onSubmit }) =
         </label>
         <textarea
           name="summary"
-          value={data}
+          value={summary}
           onChange={handleChange}
           placeholder="Enter a brief summary about yourself"
           rows={5}

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { ChangeEvent, FormEvent } from "react";
 
 export type EducationData = {
@@ -11,20 +12,19 @@ export type EducationData = {
 };
 
 interface EducationFormProps {
-  data: EducationData[]; // Accepting the data prop as an array
-  onChange: (newData: EducationData[]) => void; // Update the entire array
-  onSubmit: (data: EducationData[]) => void; // Submit the entire array
+  educationData: EducationData[]; // Expecting an array of education entries
+  setEducationData: (newEducation: EducationData[]) => void; // Function to update education data
 }
 
-const EducationForm: React.FC<EducationFormProps> = ({ data, onChange, onSubmit }) => {
+const EducationForm: React.FC<EducationFormProps> = ({ educationData, setEducationData }) => {
   const handleChange = (
     index: number,
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    const updatedData = [...data]; // Clone the array
+    const updatedData = [...educationData]; // Clone the array
     updatedData[index] = { ...updatedData[index], [name]: value }; // Update specific entry
-    onChange(updatedData); // Send updated array to parent
+    setEducationData(updatedData); // Send updated array to parent
   };
 
   const addNewEntry = () => {
@@ -36,23 +36,18 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onChange, onSubmit 
       endDate: "",
       description: "",
     };
-    onChange([...data, newEntry]); // Add new entry to the array
+    setEducationData([...educationData, newEntry]); // Add new entry to the array
   };
 
   const removeEntry = (index: number) => {
-    const updatedData = [...data];
-    updatedData.splice(index, 1); // Remove the entry at the specified index
-    onChange(updatedData); // Update the parent state
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    onSubmit(data); // Submit the entire array
+    const updatedData = educationData.filter((_, i) => i !== index); // Remove entry at index
+    setEducationData(updatedData); // Update the parent state
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {data.map((entry, index) => (
+    <div>
+      <h2 className="text-lg font-semibold mb-2">Education</h2>
+      {educationData.map((entry, index) => (
         <div key={index} className="mb-6 border-b pb-4">
           <div>
             <label>School Name</label>
@@ -116,19 +111,24 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onChange, onSubmit 
             ></textarea>
           </div>
 
-          
+          <button
+            type="button"
+            onClick={() => removeEntry(index)}
+            className="mt-2 bg-red-500 text-white p-2 rounded"
+          >
+            Remove
+          </button>
         </div>
       ))}
 
-      
-
       <button
-        type="submit"
-        className="bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 rounded"
+        type="button"
+        onClick={addNewEntry}
+        className="mt-2 bg-green-500 text-white p-2 rounded"
       >
-        Save All
+        Add Education
       </button>
-    </form>
+    </div>
   );
 };
 

@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import DarkModeToggle from "./DarkModeToggle";
+import Navbar from "@/app/components/NavBar"; 
 
 export default function NavBar() {
   return (
