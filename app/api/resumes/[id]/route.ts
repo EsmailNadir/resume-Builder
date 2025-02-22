@@ -8,7 +8,7 @@ export async function GET({ params }: { params: { id: string } }) {
 
     try{
         const resume = await Resume.findById(params.id)
-        if (!Resume) return  NextResponse.json({error:"resume not found"}, {status:404});
+        if (!resume) return  NextResponse.json({error:"resume not found"}, {status:404});
 
         return NextResponse.json(resume);
     }catch(error){
@@ -16,7 +16,7 @@ export async function GET({ params }: { params: { id: string } }) {
     }
 }
 
-export async function Delete({params}:{params: {id: string}}) {
+export async function DELETE({params}:{params: {id: string}}) {
     
     await connectMongo()
 
